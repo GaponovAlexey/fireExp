@@ -1,6 +1,13 @@
-import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { initializeApp } from "firebase-admin/app"
+import { getFirestore } from "firebase-admin/firestore"
+require('dotenv').config()
 
+//deb
+var log4js = require("log4js")
+var logger = log4js.getLogger()
+logger.level = "debug"
+
+logger.debug("DEBUG")
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,

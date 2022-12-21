@@ -3,21 +3,24 @@ var logger = log4js.getLogger()
 logger.level = "debug"
 
 import express, { Request, Response } from "express"
+import { db } from "./firebase"
 const app = express()
 app.use(express.json()) // Для req.body.data
-const port = 3001
-import { db } from "../firebase"
+const port = 3000
 
 app.get("/", (req: Request, res: Response) => {
-  const docRef = db.collection("users").onSnapshot((sn) => {
-    return sn.docs.forEach((el) => el.data())
-  })
 
-  logger.debug(JSON.stringify(docRef.toString))
+
+
+  // const docRef = db.collection("users").onSnapshot((sn) => {
+    // return sn.docs.forEach((el) => el.data())
+  // })
+
+  // logger.debug(JSON.stringify(docRef.toString))
 
   res.json({
     topic: "test-channel",
-    messages: [{ value: docRef }],
+    messages: [{ value: "you" }],
   })
 })
 app.listen(port, () => {
