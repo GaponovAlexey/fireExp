@@ -6,26 +6,18 @@ import express, { Request, Response } from "express"
 const app = express()
 app.use(express.json()) // Для req.body.data
 const port = 3001
-import { db } from "./firebase"
+import { db } from "../firebase"
 
 app.get("/", (req: Request, res: Response) => {
-  const docRef = () => {
-    const top = db.collection("users")
-    top.onSnapshot((snap) => {
-      const data = snap.docs.map((story) => {
-        const data = story.data()
-        data["id"] = story.id
-        logger.debug(data)
-        return data
-      })
-      return data
-    })
-  }
-  logger.debug(docRef())
+  const docRef = db.collection("users").onSnapshot((sn) => {
+    return sn.docs.forEach((el) => el.data())
+  })
+
+  logger.debug(JSON.stringify(docRef.toString))
 
   res.json({
     topic: "test-channel",
-    messages: [{ value: docRef() }],
+    messages: [{ value: docRef }],
   })
 })
 app.listen(port, () => {
