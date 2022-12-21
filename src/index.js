@@ -1,11 +1,9 @@
 console.log("start")
 // import { db } from "./firebase"
 // import  "dotenv"
-require("dotenv").config({
-  debug: true,
-})
 
-console.log("key", process.env.FIREBASE_API_KEY)
+
+console.log("key", import.meta.env.VITE_PORT)
 
 // const docRef = async () => {
 //   const res = await db.collection("users").get()
