@@ -15,9 +15,8 @@ admin.initializeApp({
 const db = admin.firestore()
 app.use(express.json()) // Для req.body.data
 const user = db.collection("users").get()
-logger.debug("DEBUG2")
 
-// app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 
 const port = 3000
 
